@@ -4,9 +4,7 @@ const cors = require("cors");
 
 require("dotenv").config();
 const port = process.env.PORT || 9000;
-app.use(
-  cors()
-);
+app.use(cors());
 app.use(express.json());
 app.use(require("./routes/record"));
 app.get("/", function (req, res) {
@@ -14,11 +12,11 @@ app.get("/", function (req, res) {
 });
 const dbo = require("./db/conn");
 
-
 dbo.connectToMongoDB(function (error) {
   if (error) throw error;
-console.log("the server is running");
+  console.log("the server is running");
 });
-app.listen(port, () => {
-  console.log("Server is running on port: " + port);
+
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port ${port}`);
 });
